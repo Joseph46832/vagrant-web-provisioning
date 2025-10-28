@@ -119,9 +119,9 @@ sudo systemctl restart apache2
 
 **index.html:**
 
-![index](fotos/pruebaindex.jpg)
+![index](fotos/pruebaindex.png)
 
 **info.php mostrando los registros de personas:**
 
-![info](fotos/pruebaphp.jpg)
+![info](fotos/pruebaphp.png)
 
