@@ -24,29 +24,29 @@ Todo es perfectamente funcional, ya hice pruebas y funciono, obviamente, para qu
 ## Para el retico
 
 Creamos una tabla llamada "personas"
-
+```bash
 CREATE TABLE personas (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50)
 );
-
+```
 ## Ejemplo de datos
-
+```bash
 INSERT INTO personas (nombre) VALUES 
 ('Joseph'), ('Maria'), ('Carlos'), 
 ('Ana'), ('Luis'), ('Carla'), ('Pedro'), 
 ('Sofia'), ('Miguel'), ('Laura'), 
 ('Diego'), ('Valentina'), ('Andres');
-
+```
 ## Y tenemos que otorgar todos los permisos al usuario (en mi caso) Joseph, de lo contrario, no se mostrara la tabla en la pagina debido a un error de permisos
-
+```bash
 GRANT ALL PRIVILEGES ON TABLE personas TO joseph;
-
+```
 
 ## Modificamos tanto como provision-db.sh y info.php para hacer la correcta conexion con las base de datos
 
 # info.php
-
+```bash
 <?php
 $host = "192.168.56.11"; // IP de la VM db
 $dbname = "mi_base";
@@ -67,9 +67,11 @@ if(!$conn){
     echo "</ul>";
 }
 ?>
+```
 
 # provision-db.sh
 
+```bash
 #!/bin/bash
 sudo apt update -y
 sudo apt install -y postgresql postgresql-contrib
@@ -82,7 +84,7 @@ sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mi_base TO joseph;
 # Crear tabla y datos de ejemplo
 sudo -i -u postgres psql -d mi_base -c "CREATE TABLE personas (id SERIAL PRIMARY KEY, nombre VARCHAR(50));"
 sudo -i -u postgres psql -d mi_base -c "INSERT INTO personas (nombre) VALUES ('Joseph'), ('Maria'), ('Carlos');"
-
+```
 
 ## Scripts de provisionamiento
 
@@ -111,14 +113,16 @@ Configura PostgreSQL para aceptar conexiones desde la red privada.
 
 ## Si se hace algun cambio por el mas minimo que sea hay que reprovisionar los scripts
 
+```bash
 vagrant provision db
 vagrant provision web
+```
 
 ## Y reiniciar apache si cambiamos el php
-
+```bash
 vagrant ssh web
 sudo systemctl restart apache2
-
+```
 
 ## Capturas de pantalla
 
